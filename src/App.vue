@@ -99,7 +99,7 @@
           <v-card>
             <v-card-title class="headline">New Motor Mapping</v-card-title>
             <v-card-text>
-              <p>Copy and past the following into the your CLI. Don't forget to type save.</p>
+              <p>Copy and past the following into the your CLI.</p>
               <pre>
                 {{ msg }}
               </pre>
@@ -145,6 +145,7 @@ export default {
     newMap2: '',
     newMap3: '',
     newMap4: '',
+    reset: '',
     msg: null,
     motor1: {
       resource: null,
@@ -172,19 +173,23 @@ export default {
         const motors = [this.motor1, this.motor2, this.motor3, this.motor4];
         motors.sort((a, b) => ((a.motor > b.motor) ? 1 : -1));
         if (this.motor1.motor !== 'Motor 1') {
+          this.reset += `set ${defaultTxt} ${motors[0].motor.toUpperCase()} NONE\n`;
           this.newMap1 = `set ${defaultTxt} ${motors[0].motor.toUpperCase()} ${motors[0].resource}\n`;
         }
         if (this.motor2.motor !== 'Motor 2') {
+          this.reset += `set ${defaultTxt} ${motors[1].motor.toUpperCase()} NONE\n`;
           this.newMap2 = `set ${defaultTxt} ${motors[1].motor.toUpperCase()} ${motors[1].resource}\n`;
         }
         if (this.motor3.motor !== 'Motor 3') {
+          this.reset += `set ${defaultTxt} ${motors[2].motor.toUpperCase()} NONE\n`;
           this.newMap3 = `set ${defaultTxt} ${motors[2].motor.toUpperCase()} ${motors[2].resource}\n`;
         }
         if (this.motor4.motor !== 'Motor 4') {
+          this.reset += `set ${defaultTxt} ${motors[3].motor.toUpperCase()} NONE\n`;
           this.newMap4 = `set ${defaultTxt} ${motors[3].motor.toUpperCase()} ${motors[3].resource}\n`;
         }
-        const mapMsg = this.newMap1 + this.newMap2 + this.newMap3 + this.newMap4;
-        this.msg = mapMsg.replace(/^\s+|\s+$/g, '');
+        const mapMsg = this.reset + this.newMap1 + this.newMap2 + this.newMap3 + this.newMap4;
+        this.msg = `${mapMsg.replace(/^\s+|\s+$/g, '')}\nsave`;
       }
     },
   },
