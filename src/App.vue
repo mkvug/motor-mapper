@@ -41,6 +41,15 @@
         >
           <v-col
             cols="12"
+            sm="12"
+          >
+            <v-switch
+              v-model="resetMotors"
+              :label="`Include commands to unset resources.`">
+            </v-switch>
+          </v-col>
+          <v-col
+            cols="12"
             sm="6"
           >
             <Motor
@@ -141,6 +150,7 @@ export default {
     valid: true,
     mapped: false,
     dialog: false,
+    resetMotors: false,
     newMap1: '',
     newMap2: '',
     newMap3: '',
@@ -170,22 +180,31 @@ export default {
       if (this.$refs.form.validate()) {
         this.mapped = true;
         this.dialog = true;
+        this.reset = '';
         const motors = [this.motor1, this.motor2, this.motor3, this.motor4];
         motors.sort((a, b) => ((a.motor > b.motor) ? 1 : -1));
         if (this.motor1.motor !== 'Motor 1') {
-          this.reset += `set ${defaultTxt} ${motors[0].motor.toUpperCase()} NONE\n`;
+          if (this.resetMotors) {
+            this.reset += `set ${defaultTxt} ${motors[0].motor.toUpperCase()} NONE\n`;
+          }
           this.newMap1 = `set ${defaultTxt} ${motors[0].motor.toUpperCase()} ${motors[0].resource}\n`;
         }
         if (this.motor2.motor !== 'Motor 2') {
-          this.reset += `set ${defaultTxt} ${motors[1].motor.toUpperCase()} NONE\n`;
+          if (this.resetMotors) {
+            this.reset += `set ${defaultTxt} ${motors[1].motor.toUpperCase()} NONE\n`;
+          }
           this.newMap2 = `set ${defaultTxt} ${motors[1].motor.toUpperCase()} ${motors[1].resource}\n`;
         }
         if (this.motor3.motor !== 'Motor 3') {
-          this.reset += `set ${defaultTxt} ${motors[2].motor.toUpperCase()} NONE\n`;
+          if (this.resetMotors) {
+            this.reset += `set ${defaultTxt} ${motors[2].motor.toUpperCase()} NONE\n`;
+          }
           this.newMap3 = `set ${defaultTxt} ${motors[2].motor.toUpperCase()} ${motors[2].resource}\n`;
         }
         if (this.motor4.motor !== 'Motor 4') {
-          this.reset += `set ${defaultTxt} ${motors[3].motor.toUpperCase()} NONE\n`;
+          if (this.resetMotors) {
+            this.reset += `set ${defaultTxt} ${motors[3].motor.toUpperCase()} NONE\n`;
+          }
           this.newMap4 = `set ${defaultTxt} ${motors[3].motor.toUpperCase()} ${motors[3].resource}\n`;
         }
         const mapMsg = this.reset + this.newMap1 + this.newMap2 + this.newMap3 + this.newMap4;
