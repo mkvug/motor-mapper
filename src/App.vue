@@ -185,27 +185,27 @@ export default {
         motors.sort((a, b) => ((a.motor > b.motor) ? 1 : -1));
         if (this.motor1.motor !== 'Motor 1') {
           if (this.resetMotors) {
-            this.reset += `set ${defaultTxt} ${motors[0].motor.toUpperCase()} NONE\n`;
+            this.reset += `${defaultTxt} ${motors[0].motor.toUpperCase()} NONE\n`;
           }
-          this.newMap1 = `set ${defaultTxt} ${motors[0].motor.toUpperCase()} ${motors[0].resource}\n`;
+          this.newMap1 = `${defaultTxt} ${motors[0].motor.toUpperCase()} ${motors[0].resource}\n`;
         }
         if (this.motor2.motor !== 'Motor 2') {
           if (this.resetMotors) {
-            this.reset += `set ${defaultTxt} ${motors[1].motor.toUpperCase()} NONE\n`;
+            this.reset += `${defaultTxt} ${motors[1].motor.toUpperCase()} NONE\n`;
           }
-          this.newMap2 = `set ${defaultTxt} ${motors[1].motor.toUpperCase()} ${motors[1].resource}\n`;
+          this.newMap2 = `${defaultTxt} ${motors[1].motor.toUpperCase()} ${motors[1].resource}\n`;
         }
         if (this.motor3.motor !== 'Motor 3') {
           if (this.resetMotors) {
-            this.reset += `set ${defaultTxt} ${motors[2].motor.toUpperCase()} NONE\n`;
+            this.reset += `${defaultTxt} ${motors[2].motor.toUpperCase()} NONE\n`;
           }
-          this.newMap3 = `set ${defaultTxt} ${motors[2].motor.toUpperCase()} ${motors[2].resource}\n`;
+          this.newMap3 = `${defaultTxt} ${motors[2].motor.toUpperCase()} ${motors[2].resource}\n`;
         }
         if (this.motor4.motor !== 'Motor 4') {
           if (this.resetMotors) {
-            this.reset += `set ${defaultTxt} ${motors[3].motor.toUpperCase()} NONE\n`;
+            this.reset += `${defaultTxt} ${motors[3].motor.toUpperCase()} NONE\n`;
           }
-          this.newMap4 = `set ${defaultTxt} ${motors[3].motor.toUpperCase()} ${motors[3].resource}\n`;
+          this.newMap4 = `${defaultTxt} ${motors[3].motor.toUpperCase()} ${motors[3].resource}\n`;
         }
         const mapMsg = this.reset + this.newMap1 + this.newMap2 + this.newMap3 + this.newMap4;
         this.msg = `${mapMsg.replace(/^\s+|\s+$/g, '')}\nsave`;
